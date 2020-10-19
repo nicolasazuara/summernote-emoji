@@ -1616,7 +1616,7 @@
             const t = Date.now() / 1000;
             let id = t.toString(16).split('.').join('');
             while(id.length < 14) id += '0';
-            let $html = $('<div class="d-flex"><div class="flex-shrink-0 pr-2"><div class="nav flex-column nav-pills" role="tablist"></div></div><div class="flex-grow-1"><div class="tab-content overflow-auto"></div></div></div>');
+            let $html = $('<div class="d-flex"><div class="flex-shrink-0 pr-2"><div class="nav flex-column nav-pills border-right border-ligth" role="tablist"></div></div><div class="flex-grow-1"><div class="tab-content overflow-auto"></div></div></div>');
             $.each(emojis, function (i, category) {
                 $html.find('.nav-pills').append('<a class="nav-link p-1 rounded-0' + (i == 0 ? ' active' : '') + '" href="#note-emoji-' + id + '-' + category.name + '" data-toggle="pill" role="tab">' + category.content + '</a>');
                 $html.find('.tab-content').append('<div id="note-emoji-' + id + '-' + category.name + '" class="tab-pane fade' + (i == 0 ? ' show active' : '') + '" role="tabpanel" style="height: 256px;"></div>');
