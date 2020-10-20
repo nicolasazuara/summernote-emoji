@@ -1681,7 +1681,7 @@
         hint: {
             match: /:([\-+\w]+)$/,
             search: function (keyword, callback) {
-                callback($.grep($summernote.summernote('summernote-emoji.list'), function (item) {
+                callback($.grep($.summernote.plugins.'summernote-emoji'.list, function (item) {
                     return item.name.indexOf(keyword) === 0;
                 }));
             },
