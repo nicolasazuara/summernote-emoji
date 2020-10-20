@@ -28,7 +28,7 @@
                 activity: 'Actividades',
                 travel: 'Viajes y lugares',
                 objects: 'Objetos',
-                symbols: 'Símbols',
+                symbols: 'Símbolos',
                 flags: 'Banderas',
             }
         }
