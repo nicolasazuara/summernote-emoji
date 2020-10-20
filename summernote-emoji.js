@@ -1625,7 +1625,7 @@
                         name: name,
                         char: char
                     });
-                    $html.find('.tab-content > div:last-child').append('<a class="note-emoji btn btn-sm" href="#" title=":' + name +':" style="width: 35px;">' + char + '</a>');
+                    $html.find('.tab-content > div:last-child').append('<a class="btn btn-sm" href="#" title=":' + name +':" style="width: 35px;">' + char + '</a>');
                 });
             });
             context.memo('button.emoji', function () {
@@ -1647,7 +1647,7 @@
                                 $(this).tab('show');
                                 $(this).closest('.d-flex').find('.tab-content').scrollTop(0);
                             })
-                            $dropdown.find('a.note-emoji').each(function () {
+                            $dropdown.find('a.btn-sm').each(function () {
                                 $(this).click(function (e) {
                                     e.preventDefault();
                                     context.invoke('editor.insertText', $(this).text());
