@@ -7,10 +7,39 @@
         factory(window.jQuery);
     }
 }(function ($) {
+    $.extend(true,$.summernote.lang, {
+        'en-US': {
+            'summernote-emoji': {
+                people: 'Smileys & People',
+                nature: 'Animals & Nature',
+                food: 'Food & Drink',
+                activity: 'Activity',
+                travel: 'Travel & Places',
+                objects: 'Objects',
+                symbols: 'Symbols',
+                flags: 'Flags',
+            }
+        },
+        'es-ES': {
+            'summernote-emoji': {
+                people: 'Sonrisas y personas',
+                nature: 'Animales y naturaleza',
+                food: 'Comida y bebida',
+                activity: 'Actividades',
+                travel: 'Viajes y lugares',
+                objects: 'Objetos',
+                symbols: 'Símbols',
+                flags: 'Banderas',
+            }
+        }
+    });
+    
     $.extend($.summernote.plugins, {
         'summernote-emoji': function (context) {
-            let self = this;
-            let ui = $.summernote.ui;
+            let self = this,
+            options = context.options,
+            lang = options.langInfo,
+            ui = $.summernote.ui;
             let emojis = [
                 {
                     name: 'people',
@@ -1618,14 +1647,14 @@
             while(id.length < 14) id += '0';
             let $html = $('<div class="d-flex"><div class="flex-shrink-0 pr-2"><div class="nav flex-column nav-pills border-right border-ligth" role="tablist"></div></div><div class="flex-grow-1"><div class="tab-content overflow-auto"></div></div></div>');
             $.each(emojis, function (i, category) {
-                $html.find('.nav-pills').append('<a class="nav-link p-1 rounded-0' + (i == 0 ? ' active' : '') + '" href="#note-emoji-' + id + '-' + category.name + '" data-toggle="pill" role="tab">' + category.content + '</a>');
+                $html.find('.nav-pills').append('<a class="nav-link p-1 rounded-0' + (i == 0 ? ' active' : '') + '" href="#note-emoji-' + id + '-' + category.name + '" title="' + lang['summernote-emoji'][category.name] + '" data-toggle="pill" data-placement="bottom" role="tab">' + category.content + '</a>');
                 $html.find('.tab-content').append('<div id="note-emoji-' + id + '-' + category.name + '" class="tab-pane fade' + (i == 0 ? ' show active' : '') + '" role="tabpanel" style="height: 256px;"></div>');
                 $.each(category.list, function (name, char) {
                     list.push({
                         name: name,
                         char: char
                     });
-                    $html.find('.tab-content > div:last-child').append('<a class="btn btn-sm" href="#" title=":' + name +':" style="width: 35px;">' + char + '</a>');
+                    $html.find('.tab-content > div:last-child').append('<a class="btn btn-sm" href="#" title=":' + name +':" data-toggle="tooltip" style="width: 35px;">' + char + '</a>');
                 });
             });
             context.memo('button.emoji', function () {
@@ -1653,13 +1682,12 @@
                                     context.invoke('editor.insertText', $(this).text());
                                 });
                             });
+                            $dropdown.find('[data-toggle="pill"], [data-toggle="tooltip"]').tooltip();
                         }
                     })
                 ]).render();
             });
-            this.list = function () {
-                return list;
-            }
+            window['summernote-emoji'] = list;
             this.events = {
                 'summernote.init': function () {
                     $('body').on('keydown', function (e) {
@@ -1677,11 +1705,12 @@
             }
         }
     });
+    
     $.extend($.summernote.options, {
         hint: {
             match: /:([\-+\w]+)$/,
             search: function (keyword, callback) {
-                callback($.grep($.summernote.plugins.'summernote-emoji'.list, function (item) {
+                callback($.grep(window['summernote-emoji'], function (item) {
                     return item.name.indexOf(keyword) === 0;
                 }));
             },
