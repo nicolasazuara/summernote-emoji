@@ -1687,7 +1687,7 @@
                     })
                 ]).render();
             });
-            window['summernote-emoji'] = list;
+            window.summernoteEmoji = list;
             this.events = {
                 'summernote.init': function () {
                     $('body').on('keydown', function (e) {
@@ -1710,7 +1710,7 @@
         hint: {
             match: /:([\-+\w]+)$/,
             search: function (keyword, callback) {
-                callback($.grep(window['summernote-emoji'], function (item) {
+                callback($.grep(window.summernoteEmoji, function (item) {
                     return item.name.indexOf(keyword) === 0;
                 }));
             },
