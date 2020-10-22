@@ -1709,7 +1709,7 @@
     
     $.extend($.summernote.options, {
         hint: {
-            match: /:([\-+\w]+)$/,
+            match: /:([\-+\w]+):?$/,
             search: function (keyword, callback) {
                 callback($.grep($.summernote.options['summernote-emoji'], function (item) {
                     return item.name.indexOf(keyword) === 0;
