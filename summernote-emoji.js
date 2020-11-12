@@ -1581,7 +1581,7 @@ window.summernoteEmoji = [
                 activity: 'Actividad',
                 travel: 'Viajes y lugares',
                 objects: 'Objetos',
-                symbols: 'Símbols',
+                symbols: 'Símbolos',
                 flags: 'Banderas',
             }
         }
